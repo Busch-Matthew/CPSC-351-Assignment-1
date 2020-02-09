@@ -32,12 +32,10 @@ int main()
 			pid = fork();
 
 
-			/* TODO: Error check to make sure the child was successfully created */
 			if (pid < 0){
 				fprintf(stderr, "Fork Failed");
 				return 1;
 			}
-			/*** TODO: If I am child, I will do this: ****/
 
 			else if (pid == 0){
 
@@ -50,19 +48,7 @@ int main()
 					perror("execlp() failed.\n");
 				}
 			}
-			/* Call execlp() to replace my program with that specified at the command line.
-			 * PLEASE NOTE: YOU CANNOT PASS cmdBuff DIRECTLY to execlp(). It is because
-			 * cmdBuff is an object of type string (i.e., a class) and execlp() expects
- 			 * an array of characters.  However, you can pass cmdBuff.c_str(), which will
-			 * return an array of characters representation of the string object.
-			 *
-			 * Also, please do not forget to error check your exelp() system calls.
-			 */
 
-
-			/*** TODO: If I am a parent, I will do the following ***?
-
-			/* Wait for the child process to terminate */
 			else{
 				wait(NULL);
 				cout << "Child Complete" << endl;
