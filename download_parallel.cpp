@@ -18,12 +18,14 @@ int main()
 	string download_file;
 	ifstream infile;
 	infile.open("urls.txt");
+	int counter = 0;
 
 while(infile >> download_file){
+
   			pid = fork();
 
 
-  			if (pid < 0)
+  			if (pid < 0){
   				fprintf(stderr, "Fork Failed");
   				return 1;
   			}
@@ -33,16 +35,18 @@ while(infile >> download_file){
 					if(-1 ==	execlp("/usr/bin/wget","wget",download_file.c_str(), NULL)){
 						//print the error if it fails
 						perror("execlp() failed.\n");
-			1		}
+						}
+					
 
   			}
 
   			else{
-  				cout << "Child Complete" << endl;
+  				counter++;
+					cout << "Starting Download For File #" << counter  << ": " << download_file << endl;
   			}
 		}
-		infile.close()
-		wait(NULL);
 
+		wait(NULL);
+		infile.close();
 	return 0;
 }
